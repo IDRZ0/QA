@@ -1,0 +1,29 @@
+package ejercicio2;
+
+import org.junit.After;
+import org.junit.Before;
+import singletonSession.Session;
+
+import java.io.IOException;
+
+public class Ejercicio2BaseTest {
+    @Before
+    public void open() {
+        Session.getSession().getDriver().get("https://todoist.com/es");
+    }
+
+    @After
+    public void close() throws IOException {
+        Session.getSession().closeSession();
+        // solo para windows
+        // this.killChromeDriver();
+    }
+
+    public void waitOnSecond(int seconds) throws InterruptedException {
+        Thread.sleep(seconds * 1000);
+    }
+
+    public void killChromeDriver() throws IOException {
+        Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe /T");
+    }
+}
